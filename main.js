@@ -1,4 +1,5 @@
 const { BrowserWindow, app } = require("electron");
+const path = require("path");
 
 createWindow = () => {
   const win = new BrowserWindow({
@@ -14,6 +15,8 @@ createWindow = () => {
   win.loadFile("index.html");
 };
 
-app.whenReady().then(createWindow);
+require("electron-reload")(__dirname, {
+  electron: path.join(__dirname, "node_modules", ".bin", "electron"),
+});
 
-console.log("hello there");
+app.whenReady().then(createWindow);
